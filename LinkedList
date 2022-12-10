@@ -1,0 +1,63 @@
+Odd Even Linked List
+Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return the reordered list.
+
+The first node is considered odd, and the second node is even, and so on.
+
+Note that the relative order inside both the even and odd groups should remain as it was in the input.
+
+You must solve the problem in O(1) extra space complexity and O(n) time complexity.
+
+Example: 2--> 1-->3-->5-->6-->4-->7 (input)
+       : 2-->3-->6-->7-->1-->5-->4  (output)
+       Code:
+       
+        public ListNode oddEvenList(ListNode head) {
+        ListNode oddH=null;
+        ListNode oddT=null;
+        ListNode evenH=null; 
+        ListNode evenT=null;
+        int count=1;
+        while(head!=null){
+            if(count%2==0){
+                if(evenH==null){
+                    evenH=head;
+                    evenT=head;
+                    head=head.next;
+                }
+                else{
+                    evenT.next=head;
+                    evenT=evenT.next;
+                    head=head.next;
+                }
+            }
+            else{
+                if(oddH==null){
+                    oddH=head;
+                    oddT=head;
+                    head=head.next;
+                }
+                else{
+                    oddT.next=head;
+                    oddT=oddT.next;
+                    head=head.next;
+                }
+            }
+            count++;
+        }
+        if(oddH==null){
+            return evenH;
+        }
+        if(evenH==null){
+            return oddH;
+        }
+        evenT.next=null;
+        oddT.next=evenH;
+        return oddH;
+    }
+    
+    
+    WHAT I LEARNT:
+    ## the approach used here is way too easy 
+    ## Writing - ListNode oddH,evenH,oddT,evenT=null; 
+       here this lines assign the null value to evenT only.
+       So you have to write them seperately.
